@@ -1,0 +1,16 @@
+{
+    "name": "rulon/test-composer-package",
+    "description": "descr text",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Rulon\\TestComposerPackage\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "author name"
+        }
+    ],
+    "require": {}
+}
