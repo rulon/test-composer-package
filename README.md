@@ -1,23 +1,35 @@
 # test-composer-package
 test-composer-package
 
-tutor creation composer package on github
+## Tutor creation composer package on github
 
-1. create repo user/test-composer-package
+1. create repo user/test-composer-package (user replace with your login)
 
-2. add public key to https://github.com/settings/keys
+2. add public key if needed to https://github.com/settings/keys
 
+see here:
+```bash
 cat ~/.ssh/id_rsa.pub 
+```
+3. on local computer:
+```bash
+mkdir test-composer-package 
+```
 
-3. mkdir test-composer-package
+4. 
+```bash
+cd test-composer-package
+```
 
-4. cd test-composer-package
-
-5. git clone git@github.com:rulon/test-composer-package.git .
+5. 
+```bash
+git clone git@github.com:rulon/test-composer-package.git .
+```
+put here ^^^ your real path
 
 6. try edit this file ./README.md
 
-7. 
+7. check
 ```
 git remote -vvvv
 origin  git@github.com:rulon/test-composer-package.git (fetch)
@@ -29,17 +41,25 @@ origin  git@github.com:rulon/test-composer-package.git (push)
 
 10. git push
 
-11. see: https://github.com/rulon/test-composer-package
+11. see results (put your real url): https://github.com/rulon/test-composer-package
 
-12. mkdir src && cd src
+12. 
+```bash
+mkdir src && cd src
+```
 
 13. create your files. for example MyClass.php
 
-14. composer init
-
-15. see composer.json like:
+14. 
+```bash
+composer init
 ```
+
+15. check composer.json 
+```bash
 cat composer.json 
+```
+```json
 {
     "name": "rulon/test-composer-package",
     "description": "descr text",
@@ -60,7 +80,7 @@ cat composer.json
 ```
 
 16. edit src/MyClass.php
-```
+```php
 <?php
 /**
  *
@@ -77,7 +97,7 @@ class MyClass
 }
 ```
 17. testing namespaces. create index.php
-```
+```php
 <?php
 /**
  * @since 2024-07-26 20:30
@@ -94,11 +114,58 @@ $testObj1 = new Rulon\TestComposerPackage\MyClass;
 $testObj2 = new \Rulon\TestComposerPackage\MyClass;
 
 //short class name
-$testObj2 = new MyClass;
+$testObj3 = new MyClass;
 
 ```
 call:
-
+```bash
 php index.php
+```
+18. repeat items 8-11
 
-repeat items 8-10
+19. cd to project that requires your new package
+add sections to composer.json
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rulon/test-composer-package"
+        }
+    ],
+    "require": {
+        "rulon/test-composer-package": "dev-master"
+    }
+}
+```
+
+20. 
+```bash
+composer install
+```
+
+21. test
+```bash
+cp vendor/rulon/test-composer-package/index.php .
+php index.php
+```
+result:
+```
+Rulon\TestComposerPackage\MyClass::__construct
+
+Rulon\TestComposerPackage\MyClass::__construct
+
+Rulon\TestComposerPackage\MyClass::__construct
+
+```
+
+Enjoy!
+
+<!-- 
+
+git add . && git ci --amend --no-edit && git push -f
+
+
+
+-->
